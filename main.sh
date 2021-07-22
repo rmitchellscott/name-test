@@ -7,5 +7,6 @@ echo $friendlyName
 echo "SHA: "$GITHUB_SHA
 echo "Ref: "$GITHUB_REF
 echo "Logging into gh..."
-gh auth login --with-token $GITHUB_TOKEN
-gh pr view --json number,commits,headRefName
+#gh auth login --with-token $GITHUB_TOKEN
+#gh pr view --json number,commits,headRefName
+echo $GITHUB_TOKEN
