@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
-mapfile -t adjective < adjectives
-mapfile -t name < names
+__dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+__file="${__dir}/$(basename "${BASH_SOURCE[0]}")"
+__base="$(basename ${__file} .sh)"
+mapfile -t adjective < $__dir/adjectives
+mapfile -t name < $__dir/names
 friendlyName=${adjective[RANDOM%${#adjective[@]}]-1}-${name[RANDOM%${#name[@]}]-1}
 echo $friendlyName
