@@ -8,8 +8,8 @@ _log() {
     printf '[%s] %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$*" >&2;
 }
 
-echo "SHA: "$GITHUB_SHA
-echo "Ref: "$GITHUB_REF
+_log "SHA: "$GITHUB_SHA
+_log "Ref: "$GITHUB_REF
 _log Verify this is a PR
 prNum=$(gh pr view --json number --jq .number)
 if [ ! $? -eq 0 ]; then
