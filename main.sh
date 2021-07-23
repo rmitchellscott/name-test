@@ -21,5 +21,5 @@ if [ ! $? -eq 0 ]; then
         exit 1
     fi
 fi
-prNum=$(echo $GITHUB_REF | awk -F/ '{print $3}')
 environment="pr"$prNum
+echo $environment
