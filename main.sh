@@ -19,6 +19,7 @@ if [ ! $? -eq 0 ]; then
     else
         _log "We're not operating on a pull request! Aborting."
         exit 1
+    fi
 fi
 prNum=$(echo $GITHUB_REF | awk -F/ '{print $3}')
 environment="pr"$prNum
