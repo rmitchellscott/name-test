@@ -2,10 +2,18 @@
 __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 __file="${__dir}/$(basename "${BASH_SOURCE[0]}")"
 __base="$(basename ${__file} .sh)"
-friendlyName=$(shuf -n 1 "$__dir/adjectives.txt")-$(shuf -n 1 "$__dir/names.txt")
-echo $friendlyName
+
+_log() {
+    local IFS=$' \n\t'
+    printf '[%s] %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$*" >&2;
+}
+
 echo "SHA: "$GITHUB_SHA
 echo "Ref: "$GITHUB_REF
-echo "Logging into gh..."
-#gh auth login --with-token $GITHUB_TOKEN
-gh pr view --json number,commits,headRefName
+_log Verify this is a PR
+prNum=$(gh pr view --json number --jq .number)
+if [ ! $? -eq 0 ]; then
+    _log "We're not operating on a pull request! Aborting."
+    exit 1
+fi
+environment="pr"$prNum
