@@ -27,3 +27,4 @@ fi
 environment="pr"$prNum
 echo $environment
 echo $LABEL
+echo $EVENT
