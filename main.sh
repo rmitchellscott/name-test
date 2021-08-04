@@ -15,7 +15,7 @@ _log "SHA: "$GITHUB_SHA
 _log "Ref: "$GITHUB_REF
 _log Verify this is a PR
 type=$(echo $GITHUB_REF | awk -F/ '{print $1}')
-if [ $EVENT ]; then
+if [ -z $EVENT ]; then
     prNum=$EVENT
 else
     prNum=$(gh pr view --json number --jq .number)
