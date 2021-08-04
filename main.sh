@@ -14,7 +14,8 @@ _log() {
 _log "SHA: "$GITHUB_SHA
 _log "Ref: "$GITHUB_REF
 _log Verify this is a PR
-type=$(echo $GITHUB_REF | awk -F/ '{print $1}')
+_log "event:"$EVENT
+#type=$(echo $GITHUB_REF | awk -F/ '{print $1}')
 if [ ! -z $EVENT ]; then
     prNum=$EVENT
 else
@@ -34,5 +35,4 @@ fi
 #fi
 prNum=$EVENT
 environment="pr"$prNum
-echo $environment
-echo $EVENT
+_log $environment
