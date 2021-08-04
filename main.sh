@@ -15,15 +15,16 @@ _log "SHA: "$GITHUB_SHA
 _log "Ref: "$GITHUB_REF
 _log Verify this is a PR
 type=$(echo $GITHUB_REF | awk -F/ '{print $1}')
-if [ $type=="pull" ]; then
-    prNum=$(echo $GITHUB_REF | awk -F/ '{print $3}')
-else
-    prNum=$(gh pr view --json number --jq .number)
-    if [ ! $? -eq 0 ]; then
-        _log "We're not operating on a pull request! Aborting."
-        exit 1
-    fi
-fi
+#if [ $type=="pull" ]; then
+#    prNum=$(echo $GITHUB_REF | awk -F/ '{print $3}')
+#else
+#    prNum=$(gh pr view --json number --jq .number)
+#    if [ ! $? -eq 0 ]; then
+#        _log "We're not operating on a pull request! Aborting."
+#        exit 1
+#    fi
+#fi
+prNum=$EVENT
 environment="pr"$prNum
 echo $environment
 echo $EVENT
