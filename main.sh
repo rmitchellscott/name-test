@@ -16,7 +16,8 @@ _log "Ref: "$GITHUB_REF
 _log Verify this is a PR
 _log "event:"$EVENT
 #type=$(echo $GITHUB_REF | awk -F/ '{print $1}')
-if [ ! -z $EVENT ]; then
+re='^[0-9]+$'
+if [ $EVENT =~ $re ]; then
     prNum=$EVENT
 else
     prNum=$(gh pr view --json number --jq .number)
